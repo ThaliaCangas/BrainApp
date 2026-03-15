@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Whole Brain Child</title>
+<meta name="description" content="Guía visual interactiva del libro The Whole Brain Child de Siegel y Bryson">
+<meta name="theme-color" content="#1e1812">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Whole Brain">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" id="pwa-manifest">
+<link rel="apple-touch-icon" id="apple-icon">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #fdf8f2;
+  --white: #ffffff;
+  --dark: #1e1812;
+  --terra: #c8603a;
+  --terra-light: #f5e6e0;
+  --sage: #5a7a5a;
+  --sage-light: #e4eee4;
+  --blue: #3d6fa8;
+  --blue-light: #dce9f8;
+  --gold: #d4903a;
+  --gold-light: #fef3e2;
+  --lilac: #7a5aa8;
+  --lilac-light: #ede0fa;
+  --text: #2e2418;
+  --text-muted: #7a6a58;
+  --border: rgba(30,24,18,0.09);
+  --shadow-sm: 0 2px 12px rgba(30,24,18,0.08);
+  --shadow-md: 0 6px 28px rgba(30,24,18,0.12);
+  --radius: 20px;
+  --radius-sm: 12px;
+  --nav-h: 72px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;background:#e8e0d4;}
+body{font-family:'Nunito',sans-serif;color:var(--text);}
+
+/* APP SHELL */
+.app-shell{
+  max-width: 430px;
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+/* SCREENS */
+.screen{
+  position: absolute;
+  inset: 0;
+  bottom: var(--nav-h);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  transform: translateY(12px);
+}
+.screen.active{
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+.screen::-webkit-scrollbar{display:none;}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  align-items: center;
+  padding: 0 4px 8px;
+  z-index: 100;
+  box-shadow: 0 -4px 24px rgba(30,24,18,0.08);
+}
+.nav-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  padding: 6px 4px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+  color: var(--text-muted);
+}
+.nav-item.active{color: var(--terra);}
+.nav-icon{
+  width: 38px; height: 38px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  transition: all 0.2s;
+  background: transparent;
+}
+.nav-item.active .nav-icon{background: var(--terra-light);}
+.nav-label{font-size: 0.68rem; font-weight: 700; letter-spacing: 0.02em;}
+
+/* ============================
+   SCREEN 1: HOME
+============================= */
+#s-home{background: var(--cream);}
+
+.home-hero{
+  background: linear-gradient(145deg, #1e1812 0%, #3a2818 50%, #5a3820 100%);
+  padding: 48px 24px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.home-hero::before{
+  content:'';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 20%, rgba(200,96,58,0.3) 0%, transparent 60%),
+              radial-gradient(ellipse at 10% 90%, rgba(90,122,90,0.2) 0%, transparent 50%);
+}
+.hero-eyebrow{
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 8px;
+  position: relative;
+}
+.hero-title{
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.2rem;
+  color: white;
+  line-height: 1.1;
+  position: relative;
+  margin-bottom: 10px;
+}
+.hero-title em{color: #f0b878; font-style: italic;}
+.hero-sub{
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.55;
+  position: relative;
+  max-width: 280px;
+}
+.hero-badge{
+  position: absolute;
+  right: 20px; top: 44px;
+  width: 72px; height: 72px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+.home-content{padding: 20px 16px 100px;}
+
+.section-title{
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+/* CONCEPT CARDS */
+.concept-row{display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px;}
+.concept-row::-webkit-scrollbar{display:none;}
+.concept-card{
+  flex-shrink: 0;
+  width: 150px;
+  border-radius: var(--radius);
+  padding: 18px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.concept-card:active{transform: scale(0.97);}
+.concept-card .cc-icon{font-size: 1.8rem; margin-bottom: 8px;}
+.concept-card .cc-title{font-size: 0.88rem; font-weight: 800; line-height: 1.25; margin-bottom: 4px;}
+.concept-card .cc-sub{font-size: 0.72rem; opacity: 0.75; line-height: 1.4;}
+
+.card-terra{background: var(--terra-light); color: var(--terra);}
+.card-blue{background: var(--blue-light); color: var(--blue);}
+.card-sage{background: var(--sage-light); color: var(--sage);}
+.card-gold{background: var(--gold-light); color: var(--gold);}
+
+/* QUICK TIPS */
+.quick-tip{
+  background: white;
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid var(--border);
+}
+.quick-tip:active{transform: scale(0.99);}
+.qt-icon{font-size: 1.6rem; flex-shrink: 0; margin-top: 2px;}
+.qt-title{font-size: 0.9rem; font-weight: 800; margin-bottom: 3px;}
+.qt-body{font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;}
+.qt-tag{
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-top: 6px;
+}
+
+/* ============================
+   SCREEN 2: BRAIN MAP
+============================= */
+#s-brain{background: var(--cream);}
+
+.brain-header{
+  background: linear-gradient(135deg, #2a3a5a, #1e2840);
+  padding: 44px 20px 20px;
+  text-align: center;
+}
+.brain-header h2{
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 4px;
+}
+.brain-header p{font-size: 0.8rem; color: rgba(255,255,255,0.55);}
+
+.brain-wrap{padding: 16px 16px 0;}
+
+.brain-floor-label{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.floor-pill{
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.floor-pill.up{background: var(--blue-light); color: var(--blue);}
+.floor-pill.down{background: var(--terra-light); color: var(--terra);}
+.floor-sub{font-size: 0.72rem; color: var(--text-muted);}
+
+svg.brain-svg{width:100%;height:auto;display:block;}
+.b-region{cursor:pointer;transition:all 0.18s;}
+.b-region:hover path, .b-region:hover ellipse{filter:brightness(1.1);}
+
+/* Region cards below SVG */
+.region-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 14px 16px 100px;
+}
+.region-card{
+  background: white;
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid transparent;
+}
+.region-card:active{transform: scale(0.97);}
+.region-card .rc-dot{
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+.region-card .rc-name{font-size: 0.82rem; font-weight: 800; line-height: 1.25; margin-bottom: 2px;}
+.region-card .rc-tag{font-size: 0.68rem; color: var(--text-muted);}
+
+/* BRAIN DETAIL MODAL */
+.modal-overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(30,24,18,0.55);
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-sheet{
+  width: 100%;
+  background: var(--cream);
+  border-radius: 28px 28px 0 0;
+  padding: 8px 20px 32px;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1);
+  max-height: 82vh;
+  overflow-y: auto;
+}
+.modal-sheet::-webkit-scrollbar{display:none;}
+.modal-overlay.open .modal-sheet{transform: translateY(0);}
+.modal-handle{
+  width: 40px; height: 4px;
+  background: rgba(30,24,18,0.15);
+  border-radius: 4px;
+  margin: 10px auto 20px;
+}
+.modal-tag{
+  font-size: 0.68rem; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 20px;
+  margin-bottom: 10px; display: inline-block;
+}
+.modal-title{
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.7rem;
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+.modal-body{font-size: 0.88rem; line-height: 1.7; color: #3e2e1e; margin-bottom: 14px;}
+.modal-body strong{font-weight: 800;}
+.tip-card{
+  background: var(--gold-light);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  display: flex; gap: 10px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(212,144,58,0.25);
+}
+.tip-card .tip-icon{font-size: 1.2rem; flex-shrink: 0;}
+.tip-card p{font-size: 0.82rem; color: #5a3808; line-height: 1.55;}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{
+  font-size: 0.72rem; font-weight: 700;
+  padding: 4px 10px; border-radius: 20px;
+}
+.modal-close{
+  position: sticky;
+  top: 0;
+  float: right;
+  background: rgba(30,24,18,0.08);
+  border: none;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: -32px;
+  margin-top: 4px;
+}
+
+/* ============================
+   SCREEN 3: STRATEGIES
+============================= */
+#s-strategies{background: var(--cream);}
+
+.strat-header{
+  background: linear-gradient(135deg, #3a1a2a, #5a2a3a);
+  padding: 44px 20px 24px;
+}
+.strat-header h2{
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 4px;
+}
+.strat-header p{font-size: 0.8rem; color: rgba(255,255,255,0.55);}
+
+.strat-content{padding: 16px 16px 100px;}
+
+.chapter-block{margin-bottom: 24px;}
+.chapter-label{
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 12px;
+}
+.chapter-num{
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 800;
+  flex-shrink: 0;
+}
+.chapter-name{font-size: 0.78rem; font-weight: 800; letter-spacing: 0.04em; color: var(--text-muted);}
+
+.strat-card{
+  background: white;
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.strat-card:active{transform: scale(0.99);}
+.strat-card::before{
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  border-radius: 4px 0 0 4px;
+}
+.strat-num{
+  font-size: 0.68rem; font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.strat-name-en{
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+.strat-name-es{
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+.strat-preview{font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;}
+
+/* ============================
+   SCREEN 4: CONCEPTS
+============================= */
+#s-concepts{background: var(--cream);}
+
+.conc-header{
+  background: linear-gradient(135deg, #1a3a2a, #2a5a3a);
+  padding: 44px 20px 24px;
+}
+.conc-header h2{
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 4px;
+}
+.conc-header p{font-size: 0.8rem; color: rgba(255,255,255,0.55);}
+
+.conc-content{padding: 16px 16px 100px;}
+
+.conc-card{
+  background: white;
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.conc-card:active{transform: scale(0.99);}
+.conc-card-header{
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.conc-icon{
+  width: 46px; height: 46px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.conc-title{font-size: 0.95rem; font-weight: 800; margin-bottom: 2px;}
+.conc-subtitle{font-size: 0.75rem; color: var(--text-muted);}
+.conc-body{
+  padding: 0 18px 16px;
+  font-size: 0.83rem;
+  color: #3e2e1e;
+  line-height: 1.65;
+  display: none;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+.conc-body.open{display: block;}
+.conc-arrow{
+  margin-left: auto;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+.conc-card.open .conc-arrow{transform: rotate(180deg);}
+
+/* INTEGRATION VISUAL */
+.integration-visual{
+  background: linear-gradient(135deg, var(--dark), #3a2820);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  margin-bottom: 12px;
+  color: white;
+}
+.iv-title{
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem;
+  color: #f0c878;
+  margin-bottom: 8px;
+}
+.iv-body{font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.6;}
+.iv-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+.iv-item{
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.iv-item-icon{font-size: 1.1rem; margin-bottom: 4px;}
+.iv-item-name{font-size: 0.75rem; font-weight: 700; color: #f0c878;}
+.iv-item-desc{font-size: 0.68rem; color: rgba(255,255,255,0.55); margin-top: 2px; line-height: 1.4;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.anim-in{animation: fadeUp 0.4s ease both;}
+.anim-in:nth-child(1){animation-delay:0.05s;}
+.anim-in:nth-child(2){animation-delay:0.1s;}
+.anim-in:nth-child(3){animation-delay:0.15s;}
+.anim-in:nth-child(4){animation-delay:0.2s;}
+.anim-in:nth-child(5){animation-delay:0.25s;}
+.anim-in:nth-child(6){animation-delay:0.3s;}
+
+@keyframes pulse{
+  0%,100%{opacity:0.5;transform:scale(1);}
+  50%{opacity:1;transform:scale(1.05);}
+}
+.pulse{animation:pulse 2.2s ease infinite;}
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+<!-- ============ SCREEN: HOME ============ -->
+<div class="screen active" id="s-home">
+  <div class="home-hero">
+    <div class="hero-badge">🧠</div>
+    <p class="hero-eyebrow">Siegel &amp; Bryson</p>
+    <h1 class="hero-title">The Whole<br><em>Brain Child</em></h1>
+    <p class="hero-sub">Guía para entender y nutrir la mente en desarrollo de tu hijo</p>
+  </div>
+
+  <div class="home-content">
+    <p class="section-title">Conceptos clave</p>
+    <div class="concept-row">
+      <div class="concept-card card-blue anim-in" onclick="goTo('s-brain')">
+        <div class="cc-icon">🏠</div>
+        <div class="cc-title">Piso Arriba &amp; Abajo</div>
+        <div class="cc-sub">Cerebro racional vs emocional</div>
+      </div>
+      <div class="concept-card card-terra anim-in" onclick="goTo('s-brain')">
+        <div class="cc-icon">↔️</div>
+        <div class="cc-title">Izquierdo &amp; Derecho</div>
+        <div class="cc-sub">Lógica vs emociones</div>
+      </div>
+      <div class="concept-card card-sage anim-in" onclick="goTo('s-concepts')">
+        <div class="cc-icon">🔗</div>
+        <div class="cc-title">Integración</div>
+        <div class="cc-sub">El objetivo central del libro</div>
+      </div>
+      <div class="concept-card card-gold anim-in" onclick="goTo('s-strategies')">
+        <div class="cc-icon">⚡</div>
+        <div class="cc-title">12 Estrategias</div>
+        <div class="cc-sub">Herramientas para cada día</div>
+      </div>
+    </div>
+
+    <p class="section-title">Situaciones frecuentes</p>
+
+    <div class="quick-tip anim-in" onclick="openModal('amygdala')">
+      <span class="qt-icon">🔥</span>
+      <div>
+        <div class="qt-title">Mi hijo hace berrinche o explota</div>
+        <div class="qt-body">La amígdala tomó el control. Aprende por qué pasa y qué hacer.</div>
+        <span class="qt-tag" style="background:var(--terra-light);color:var(--terra);">Amígdala · Piso de Abajo</span>
+      </div>
+    </div>
+
+    <div class="quick-tip anim-in" onclick="goTo('s-strategies');setTimeout(()=>highlightStrat(0),300)">
+      <span class="qt-icon">💬</span>
+      <div>
+        <div class="qt-title">No me escucha cuando está molesto</div>
+        <div class="qt-body">Conectar primero, redirigir después. La estrategia #1 del libro.</div>
+        <span class="qt-tag" style="background:var(--blue-light);color:var(--blue);">Estrategia 1 · Connect &amp; Redirect</span>
+      </div>
+    </div>
+
+    <div class="quick-tip anim-in" onclick="goTo('s-strategies');setTimeout(()=>highlightStrat(1),300)">
+      <span class="qt-icon">🏷️</span>
+      <div>
+        <div class="qt-title">No sabe expresar lo que siente</div>
+        <div class="qt-body">"Nómbralo para domarlo" — dar palabras a las emociones las calma.</div>
+        <span class="qt-tag" style="background:var(--sage-light);color:var(--sage);">Estrategia 2 · Name It to Tame It</span>
+      </div>
+    </div>
+
+    <div class="quick-tip anim-in" onclick="openModal('prefrontal')">
+      <span class="qt-icon">🚧</span>
+      <div>
+        <div class="qt-title">¿Por qué no puede controlarse?</div>
+        <div class="qt-body">La corteza prefrontal no madura hasta los 25 años. No es mala voluntad.</div>
+        <span class="qt-tag" style="background:var(--blue-light);color:var(--blue);">Corteza Prefrontal · En construcción</span>
+      </div>
+    </div>
+
+    <div class="quick-tip anim-in" onclick="goTo('s-concepts')">
+      <span class="qt-icon">💡</span>
+      <div>
+        <div class="qt-title">¿Qué es la integración cerebral?</div>
+        <div class="qt-body">El objetivo central del libro: conectar todas las partes para que trabajen juntas.</div>
+        <span class="qt-tag" style="background:var(--gold-light);color:var(--gold);">Concepto central</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SCREEN: BRAIN MAP ============ -->
+<div class="screen" id="s-brain">
+  <div class="brain-header">
+    <h2>Mapa del Cerebro</h2>
+    <p>Toca una región para explorar su función</p>
+  </div>
+
+  <div class="brain-wrap">
+    <div class="brain-floor-label">
+      <span class="floor-pill up">🏠 Piso de Arriba</span>
+      <span class="floor-sub">Cerebro pensante / racional</span>
+    </div>
+
+    <svg class="brain-svg" viewBox="0 0 440 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="g-cortex-l" cx="40%" cy="40%" r="65%">
+          <stop offset="0%" stop-color="#6baae0"/><stop offset="100%" stop-color="#3a6898"/>
+        </radialGradient>
+        <radialGradient id="g-cortex-r" cx="60%" cy="40%" r="65%">
+          <stop offset="0%" stop-color="#9a78cc"/><stop offset="100%" stop-color="#6a48a8"/>
+        </radialGradient>
+        <radialGradient id="g-pfc" cx="50%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#90c8f8"/><stop offset="100%" stop-color="#4880c0"/>
+        </radialGradient>
+        <radialGradient id="g-limbic" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#e89080"/><stop offset="100%" stop-color="#b84030"/>
+        </radialGradient>
+        <radialGradient id="g-amyg" cx="40%" cy="40%" r="65%">
+          <stop offset="0%" stop-color="#f08070"/><stop offset="100%" stop-color="#b02818"/>
+        </radialGradient>
+        <radialGradient id="g-hippo" cx="40%" cy="40%" r="65%">
+          <stop offset="0%" stop-color="#d8a860"/><stop offset="100%" stop-color="#9a6820"/>
+        </radialGradient>
+        <radialGradient id="g-stem" cx="50%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#b878a8"/><stop offset="100%" stop-color="#783068"/>
+        </radialGradient>
+        <radialGradient id="g-corpus" cx="50%" cy="50%" r="65%">
+          <stop offset="0%" stop-color="#f0d068"/><stop offset="100%" stop-color="#c09020"/>
+        </radialGradient>
+        <filter id="glow2"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      <!-- Skull bg -->
+      <ellipse cx="220" cy="175" rx="168" ry="158" fill="#f0e8d8" stroke="#d4c4a8" stroke-width="1.5"/>
+
+      <!-- DIVIDER -->
+      <line x1="75" y1="255" x2="365" y2="255" stroke="#b09070" stroke-width="1.5" stroke-dasharray="7,5" opacity="0.7"/>
+      <!-- Vertical divider -->
+      <line x1="220" y1="55" x2="220" y2="310" stroke="#b09070" stroke-width="1" stroke-dasharray="5,7" opacity="0.4"/>
+
+      <!-- LEFT CORTEX -->
+      <g class="b-region" onclick="openModal('left')">
+        <path d="M220,68 C202,62 182,65 163,74 C136,86 112,108 97,135 C83,162 78,194 81,222 C84,246 94,264 110,255 C140,255 180,255 220,255 Z"
+          fill="url(#g-cortex-l)" stroke="#2a5888" stroke-width="1.5" opacity="0.9"/>
+        <path d="M118,105 Q107,120 112,142" fill="none" stroke="#2a5080" stroke-width="1" opacity="0.45"/>
+        <path d="M97,162 Q90,180 96,200" fill="none" stroke="#2a5080" stroke-width="1" opacity="0.45"/>
+        <path d="M142,84 Q132,100 140,118" fill="none" stroke="#2a5080" stroke-width="1" opacity="0.4"/>
+        <text x="128" y="162" font-family="Nunito" font-size="10.5" fill="white" font-weight="800" text-anchor="middle" opacity="0.95">Hemisferio</text>
+        <text x="128" y="176" font-family="Nunito" font-size="10.5" fill="white" font-weight="800" text-anchor="middle" opacity="0.95">Izquierdo</text>
+      </g>
+
+      <!-- RIGHT CORTEX -->
+      <g class="b-region" onclick="openModal('right')">
+        <path d="M220,68 C238,62 258,65 277,74 C304,86 328,108 343,135 C357,162 362,194 359,222 C356,246 346,264 330,255 C300,255 260,255 220,255 Z"
+          fill="url(#g-cortex-r)" stroke="#5a38a0" stroke-width="1.5" opacity="0.9"/>
+        <path d="M322,105 Q333,120 328,142" fill="none" stroke="#5a3890" stroke-width="1" opacity="0.45"/>
+        <path d="M343,162 Q350,180 344,200" fill="none" stroke="#5a3890" stroke-width="1" opacity="0.45"/>
+        <path d="M298,84 Q308,100 300,118" fill="none" stroke="#5a3890" stroke-width="1" opacity="0.4"/>
+        <text x="312" y="162" font-family="Nunito" font-size="10.5" fill="white" font-weight="800" text-anchor="middle" opacity="0.95">Hemisferio</text>
+        <text x="312" y="176" font-family="Nunito" font-size="10.5" fill="white" font-weight="800" text-anchor="middle" opacity="0.95">Derecho</text>
+      </g>
+
+      <!-- PREFRONTAL CORTEX -->
+      <g class="b-region" onclick="openModal('prefrontal')">
+        <path d="M163,74 C180,56 202,52 220,52 C238,52 258,56 277,74 C258,84 240,88 220,88 C200,88 180,84 163,74 Z"
+          fill="url(#g-pfc)" stroke="#2060b8" stroke-width="2" filter="url(#glow2)"/>
+        <text x="220" y="75" font-family="Nunito" font-size="9" fill="white" font-weight="800" text-anchor="middle" letter-spacing="0.3">CORTEZA PREFRONTAL</text>
+      </g>
+
+      <!-- CORPUS CALLOSUM -->
+      <g class="b-region" onclick="openModal('corpus')">
+        <ellipse cx="220" cy="205" rx="44" ry="11" fill="url(#g-corpus)" stroke="#c09020" stroke-width="1.5" opacity="0.92"/>
+        <text x="220" y="209" font-family="Nunito" font-size="8" fill="#5a3800" font-weight="800" text-anchor="middle">Cuerpo Calloso</text>
+      </g>
+
+      <!-- LIMBIC -->
+      <g class="b-region" onclick="openModal('limbic')">
+        <path d="M115,255 C100,255 87,268 84,285 C80,305 88,326 107,336 C135,346 178,350 220,350 C262,350 305,346 333,336 C352,326 360,305 356,285 C353,268 340,255 325,255 Z"
+          fill="url(#g-limbic)" stroke="#981828" stroke-width="1.5" opacity="0.92"/>
+        <text x="220" y="293" font-family="Nunito" font-size="12" fill="white" font-weight="800" text-anchor="middle">Sistema Límbico</text>
+        <text x="220" y="308" font-family="Nunito" font-size="8.5" fill="rgba(255,255,255,0.75)" text-anchor="middle">(cerebro emocional)</text>
+      </g>
+
+      <!-- AMYGDALA (L+R) -->
+      <g class="b-region" onclick="openModal('amygdala')">
+        <ellipse cx="158" cy="310" rx="28" ry="19" fill="url(#g-amyg)" stroke="#880c10" stroke-width="1.5" filter="url(#glow2)"/>
+        <ellipse cx="282" cy="310" rx="28" ry="19" fill="url(#g-amyg)" stroke="#880c10" stroke-width="1.5" filter="url(#glow2)"/>
+        <ellipse cx="158" cy="310" rx="28" ry="19" fill="none" stroke="#f04830" stroke-width="2" opacity="0.5" class="pulse"/>
+        <ellipse cx="282" cy="310" rx="28" ry="19" fill="none" stroke="#f04830" stroke-width="2" opacity="0.5" class="pulse"/>
+        <text x="158" y="314" font-family="Nunito" font-size="8" fill="white" font-weight="800" text-anchor="middle">Amígdala</text>
+        <text x="282" y="314" font-family="Nunito" font-size="8" fill="white" font-weight="800" text-anchor="middle">Amígdala</text>
+      </g>
+
+      <!-- HIPPOCAMPUS -->
+      <g class="b-region" onclick="openModal('hippo')">
+        <path d="M130,328 Q117,340 120,354 Q128,364 144,358 Q158,350 155,336 Q150,326 138,326 Z"
+          fill="url(#g-hippo)" stroke="#784010" stroke-width="1.2"/>
+        <path d="M310,328 Q323,340 320,354 Q312,364 296,358 Q282,350 285,336 Q290,326 302,326 Z"
+          fill="url(#g-hippo)" stroke="#784010" stroke-width="1.2"/>
+        <text x="136" y="346" font-family="Nunito" font-size="6.5" fill="white" font-weight="700" text-anchor="middle">Hipocampo</text>
+        <text x="304" y="346" font-family="Nunito" font-size="6.5" fill="white" font-weight="700" text-anchor="middle">Hipocampo</text>
+      </g>
+
+      <!-- BRAINSTEM -->
+      <g class="b-region" onclick="openModal('brainstem')">
+        <path d="M188,350 C183,358 180,374 182,390 C184,408 196,420 214,422 C218,423 222,423 226,422 C244,420 256,408 258,390 C260,374 257,358 252,350 C238,346 202,346 188,350 Z"
+          fill="url(#g-stem)" stroke="#502050" stroke-width="1.5"/>
+        <path d="M200,365 Q203,378 201,392" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        <path d="M232,365 Q235,378 233,392" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        <text x="220" y="386" font-family="Nunito" font-size="9.5" fill="white" font-weight="800" text-anchor="middle">Tronco</text>
+        <text x="220" y="399" font-family="Nunito" font-size="9.5" fill="white" font-weight="800" text-anchor="middle">Encefálico</text>
+      </g>
+
+      <!-- Skull outline -->
+      <ellipse cx="220" cy="175" rx="168" ry="158" fill="none" stroke="#c4b498" stroke-width="1.2" opacity="0.5"/>
+
+      <!-- FLOOR LABELS on svg -->
+      <text x="56" y="145" font-family="Nunito" font-size="8" fill="#3d6fa8" font-weight="800" text-anchor="middle" transform="rotate(-90,56,160)" letter-spacing="1.5" opacity="0.8">ARRIBA</text>
+      <text x="56" y="315" font-family="Nunito" font-size="8" fill="#c8603a" font-weight="800" text-anchor="middle" transform="rotate(-90,56,310)" letter-spacing="1.5" opacity="0.8">ABAJO</text>
+      <line x1="60" y1="68" x2="60" y2="252" stroke="#3d6fa8" stroke-width="1.5" opacity="0.4"/>
+      <line x1="60" y1="258" x2="60" y2="420" stroke="#c8603a" stroke-width="1.5" opacity="0.4"/>
+    </svg>
+
+    <div class="brain-floor-label" style="margin-top:4px;">
+      <span class="floor-pill down">🔥 Piso de Abajo</span>
+      <span class="floor-sub">Cerebro emocional / supervivencia</span>
+    </div>
+  </div>
+
+  <div class="region-grid">
+    <div class="region-card" onclick="openModal('prefrontal')" style="border-color:#4a80c0;">
+      <div class="rc-dot" style="background:#4a80c0;"></div>
+      <div class="rc-name">Corteza Prefrontal</div>
+      <div class="rc-tag">CEO del cerebro</div>
+    </div>
+    <div class="region-card" onclick="openModal('corpus')" style="border-color:#c09020;">
+      <div class="rc-dot" style="background:#c09020;"></div>
+      <div class="rc-name">Cuerpo Calloso</div>
+      <div class="rc-tag">Puente Izq.–Der.</div>
+    </div>
+    <div class="region-card" onclick="openModal('left')" style="border-color:#5a8a5a;">
+      <div class="rc-dot" style="background:#3a6898;"></div>
+      <div class="rc-name">Hemisferio Izq.</div>
+      <div class="rc-tag">Lógica · Lenguaje</div>
+    </div>
+    <div class="region-card" onclick="openModal('right')" style="border-color:#7a5aaa;">
+      <div class="rc-dot" style="background:#6a48a8;"></div>
+      <div class="rc-name">Hemisferio Der.</div>
+      <div class="rc-tag">Emociones · Imágenes</div>
+    </div>
+    <div class="region-card" onclick="openModal('limbic')" style="border-color:#b84030;">
+      <div class="rc-dot" style="background:#b84030;"></div>
+      <div class="rc-name">Sistema Límbico</div>
+      <div class="rc-tag">Centro emocional</div>
+    </div>
+    <div class="region-card" onclick="openModal('amygdala')" style="border-color:#b02818;">
+      <div class="rc-dot" style="background:#b02818;"></div>
+      <div class="rc-name">Amígdala</div>
+      <div class="rc-tag">Alarma de peligro</div>
+    </div>
+    <div class="region-card" onclick="openModal('hippo')" style="border-color:#9a6820;">
+      <div class="rc-dot" style="background:#9a6820;"></div>
+      <div class="rc-name">Hipocampo</div>
+      <div class="rc-tag">Memoria narrativa</div>
+    </div>
+    <div class="region-card" onclick="openModal('brainstem')" style="border-color:#783068;">
+      <div class="rc-dot" style="background:#783068;"></div>
+      <div class="rc-name">Tronco Encefálico</div>
+      <div class="rc-tag">Supervivencia básica</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SCREEN: STRATEGIES ============ -->
+<div class="screen" id="s-strategies">
+  <div class="strat-header">
+    <h2>12 Estrategias</h2>
+    <p>Herramientas prácticas para cada día como padre o madre</p>
+  </div>
+  <div class="strat-content" id="strat-list"></div>
+</div>
+
+<!-- ============ SCREEN: CONCEPTS ============ -->
+<div class="screen" id="s-concepts">
+  <div class="conc-header">
+    <h2>Conceptos del Libro</h2>
+    <p>Las ideas fundamentales que explica Siegel &amp; Bryson</p>
+  </div>
+  <div class="conc-content">
+
+    <div class="integration-visual">
+      <div class="iv-title">🔗 La Integración</div>
+      <div class="iv-body">El libro propone que un cerebro sano no es uno que suprime las emociones, sino uno que <strong>integra</strong> sus partes para trabajar juntas. Como padre, puedes ayudar a que tu hijo construya esa integración.</div>
+      <div class="iv-grid">
+        <div class="iv-item">
+          <div class="iv-item-icon">↔️</div>
+          <div class="iv-item-name">Izq. + Der.</div>
+          <div class="iv-item-desc">Lógica + emoción trabajando juntas</div>
+        </div>
+        <div class="iv-item">
+          <div class="iv-item-icon">🏠</div>
+          <div class="iv-item-name">Arriba + Abajo</div>
+          <div class="iv-item-desc">Razón + instinto en equilibrio</div>
+        </div>
+        <div class="iv-item">
+          <div class="iv-item-icon">📖</div>
+          <div class="iv-item-name">Memoria</div>
+          <div class="iv-item-desc">Pasado integrado, no traumático</div>
+        </div>
+        <div class="iv-item">
+          <div class="iv-item-icon">🧘</div>
+          <div class="iv-item-name">Mindsight</div>
+          <div class="iv-item-desc">Ver la propia mente con claridad</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="conc-accordion"></div>
+  </div>
+</div>
+
+<!-- BRAIN DETAIL MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-sheet" id="modal-sheet">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <div class="modal-tag" id="m-tag">Tag</div>
+    <h2 class="modal-title" id="m-title">Title</h2>
+    <p class="modal-body" id="m-body">Body</p>
+    <div class="tip-card">
+      <span class="tip-icon">💡</span>
+      <p id="m-tip">Tip</p>
+    </div>
+    <div class="chip-row" id="m-chips"></div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="nav-item active" onclick="goTo('s-home')" id="nav-home">
+    <div class="nav-icon">🏡</div>
+    <span class="nav-label">Inicio</span>
+  </div>
+  <div class="nav-item" onclick="goTo('s-brain')" id="nav-brain">
+    <div class="nav-icon">🧠</div>
+    <span class="nav-label">Cerebro</span>
+  </div>
+  <div class="nav-item" onclick="goTo('s-strategies')" id="nav-strat">
+    <div class="nav-icon">⚡</div>
+    <span class="nav-label">Estrategias</span>
+  </div>
+  <div class="nav-item" onclick="goTo('s-concepts')" id="nav-conc">
+    <div class="nav-icon">📚</div>
+    <span class="nav-label">Conceptos</span>
+  </div>
+</nav>
+
+</div><!-- end app-shell -->
+
+<script>
+// ============ DATA ============
+
+const regions = {
+  prefrontal:{
+    tag:"Piso de Arriba · Corteza Prefrontal",
+    title:"Corteza Prefrontal",
+    color:"#3d6fa8",bg:"#dce9f8",
+    body:"Es el <strong>CEO del cerebro</strong>: el centro de mando racional. Se ubica justo detrás de la frente. Es responsable de la toma de decisiones, planificación, control de impulsos, empatía y comprensión moral. En los niños está <em>en construcción hasta los 25 años</em>.",
+    tip:"Cuando el niño 'explota', su corteza prefrontal se desconectó. Siegel lo llama <strong>'flipping the lid'</strong> (destapando la olla). Tu trabajo como padre es ayudar a reconectarla — no reñir.",
+    chips:["Control de impulsos","Empatía","Planeación","Moralidad","Decisiones"]
+  },
+  left:{
+    tag:"División Izquierda–Derecha",
+    title:"Hemisferio Izquierdo",
+    color:"#3a6898",bg:"#dce9f8",
+    body:"Hemisferio <strong>lógico, lingüístico y lineal</strong>. Procesa el lenguaje, hechos, causa-efecto y el orden. En niños pequeños está menos desarrollado, lo que explica por qué no pueden 'razonar' cuando están desbordados emocionalmente.",
+    tip:"<strong>Estrategia:</strong> 'Name it to tame it' — ponle nombre a la emoción. Usar el hemisferio izquierdo para describir lo que siente activa el derecho a calmarse.",
+    chips:["Lógica","Lenguaje","Causa y efecto","Hechos","Narrativa"]
+  },
+  right:{
+    tag:"División Izquierda–Derecha",
+    title:"Hemisferio Derecho",
+    color:"#6a48a8",bg:"#ede0fa",
+    body:"Hemisferio <strong>emocional, holístico y no verbal</strong>. Procesa emociones, imágenes, música, sensaciones del cuerpo. Los bebés y niños pequeños viven desde aquí. Cuando lloran o hacen berrinche, hablan desde este hemisferio.",
+    tip:"<strong>Estrategia:</strong> Antes de razonar, <em>conéctate emocionalmente</em>. Usa el tono de voz suave, el contacto físico y la expresión facial — no las palabras. Habla a su hemisferio derecho primero.",
+    chips:["Emociones","Imágenes","Sensaciones","Creatividad","Apego"]
+  },
+  corpus:{
+    tag:"Integración Izq.–Der.",
+    title:"Cuerpo Calloso",
+    color:"#b07018",bg:"#fef3e2",
+    body:"El <strong>puente entre los dos hemisferios</strong>. Permite que la lógica del izquierdo y las emociones del derecho trabajen juntas. Un cuerpo calloso bien integrado ayuda al niño a entender sus emociones con palabras mientras las siente plenamente.",
+    tip:"<strong>Clave:</strong> Contar historias es una de las mejores formas de integrar ambos hemisferios. Involucra emoción Y lenguaje al mismo tiempo — activa ambos lados.",
+    chips:["Puente Izq.–Der.","Integración","Narrar historias","Maduración gradual"]
+  },
+  limbic:{
+    tag:"Piso de Abajo · Sistema Límbico",
+    title:"Sistema Límbico",
+    color:"#b84030",bg:"#f5e6e0",
+    body:"El centro emocional y de supervivencia del cerebro. Genera <strong>emociones fuertes, respuestas de miedo, apego y memorias emocionales</strong>. En los niños es más dominante que la corteza, haciéndolos muy reactivos. Incluye amígdala e hipocampo.",
+    tip:"El sistema límbico responde más rápido que la corteza prefrontal. Por eso los niños primero reaccionan y luego piensan — ¡es biología, no mala voluntad!",
+    chips:["Centro emocional","Apego","Miedo","Placer","Memorias emocionales"]
+  },
+  amygdala:{
+    tag:"Piso de Abajo · Alarma de Emergencia",
+    title:"Amígdala",
+    color:"#b02818",bg:"#f5e6e0",
+    body:"La <strong>alarma de seguridad del cerebro</strong>. Detecta peligros (reales o percibidos) y activa la respuesta de lucha, huida o parálisis. Cuando un niño hace un berrinche masivo, la amígdala 'secuestró' al cerebro racional. Esto se llama <strong>amygdala hijack</strong>.",
+    tip:"<strong>Regla de oro:</strong> No puedes razonar con un niño cuya amígdala está activa. Primero hay que calmar el sistema nervioso — luego enseñar. <em>'Connect, then redirect.'</em>",
+    chips:["Lucha-huida-parálisis","Alarma emocional","Berrinches","Amygdala hijack","Miedo"]
+  },
+  hippo:{
+    tag:"Piso de Abajo · Memoria",
+    title:"Hipocampo",
+    color:"#8a5810",bg:"#fef3e2",
+    body:"El <strong>archivador de memorias</strong>. Convierte experiencias en memorias a largo plazo con contexto. En niños pequeños está en desarrollo — por eso no recuerdan eventos antes de los 2–3 años. Crucial para la memoria narrativa.",
+    tip:"<strong>Estrategia:</strong> Hacer un 'replay' de experiencias difíciles — contar juntos lo que pasó — ayuda al hipocampo a procesar y archivar la experiencia sanamente, reduciendo el trauma.",
+    chips:["Memoria a largo plazo","Contexto","Narrativa","Aprendizaje emocional"]
+  },
+  brainstem:{
+    tag:"Piso de Abajo · Supervivencia",
+    title:"Tronco Encefálico",
+    color:"#703068",bg:"#ede0fa",
+    body:"La parte <strong>más primitiva del cerebro</strong>. Controla funciones básicas de supervivencia: respiración, ritmo cardíaco, temperatura. Junto con el sistema límbico forma el 'piso de abajo'. En pánico extremo, el tronco encefálico toma control total.",
+    tip:"Cuando un niño está completamente desregulado (grita, no escucha), opera desde el tronco encefálico. Solo funciona la intervención sensorial: abrazo, voz calmante, movimiento suave.",
+    chips:["Supervivencia","Respiración","Instintos básicos","Función autónoma"]
+  }
+};
+
+const strategies = [
+  {
+    chapter:1,chapterName:"Integración Izquierdo–Derecho",chapterColor:"#3a6898",chapterBg:"#dce9f8",
+    items:[
+      {
+        num:"01", en:"Connect and Redirect", es:"Conectar y Redirigir",
+        preview:"Primero valida la emoción (hemisferio derecho), luego introduce la lógica.",
+        full:"Cuando un niño está molesto, primero <strong>conéctate emocionalmente</strong> reconociendo lo que siente ('Veo que estás muy frustrado'). Solo después de que se siente comprendido, su cerebro estará listo para escuchar la lógica o la corrección. Reñirlo de inmediato cierra la comunicación."
+      },
+      {
+        num:"02", en:"Name It to Tame It", es:"Nómbralo para Domarlo",
+        preview:"Poner palabras a las emociones activa el hemisferio izquierdo y calma al derecho.",
+        full:"Ayuda al niño a poner palabras a lo que siente: 'Estás muy enojado porque…'. Esto activa el hemisferio izquierdo (lenguaje) que modula la respuesta emocional del derecho. El simple acto de nombrar una emoción reduce su intensidad — está comprobado neurológicamente."
+      }
+    ]
+  },
+  {
+    chapter:2,chapterName:"Integración Arriba–Abajo",chapterColor:"#c8603a",chapterBg:"#f5e6e0",
+    items:[
+      {
+        num:"03", en:"Engage, Don't Enrage", es:"Involucrar, No Enfurecer",
+        preview:"Invita al cerebro racional a participar en lugar de activar más el reactivo.",
+        full:"En lugar de ordenar o amenazar (lo que activa el piso de abajo), <strong>haz preguntas</strong> que inviten al niño a pensar: '¿Cómo crees que se sintió tu amigo?' o '¿Qué podrías hacer diferente?'. Esto ejercita la corteza prefrontal incluso en momentos difíciles."
+      },
+      {
+        num:"04", en:"Use It or Lose It", es:"Úsalo o Piérdelo",
+        preview:"Ejercitar el piso de arriba deliberadamente lo fortalece con el tiempo.",
+        full:"El cerebro se moldea según cómo se usa. <strong>Practica ejercicios del piso de arriba</strong> en momentos tranquilos: habla de emociones, haz juegos de rol con situaciones difíciles, discute dilemas morales. Los niños que practican regulación en calma la pueden usar en crisis."
+      }
+    ]
+  },
+  {
+    chapter:3,chapterName:"Integración de la Memoria",chapterColor:"#8a5810",chapterBg:"#fef3e2",
+    items:[
+      {
+        num:"05", en:"Remember to Remember", es:"Recuerda para Recordar",
+        preview:"Las memorias implícitas (inconscientes) afectan el comportamiento — háblales.",
+        full:"Existen dos tipos de memoria: <strong>implícita</strong> (inconsciente, corporal, antes de los 3 años) y <strong>explícita</strong> (con palabras y contexto). Las memorias implícitas no procesadas se convierten en miedos o reacciones inexplicables. Hablar sobre experiencias pasadas ayuda a convertirlas en explícitas."
+      },
+      {
+        num:"06", en:"Use the Remote of the Mind", es:"Usa el Control Remoto Mental",
+        preview:"Enseña a pausar, rebobinar y ver las emociones como películas del pasado.",
+        full:"Enseña al niño a <strong>visualizar sus memorias y emociones</strong> como una película que puede pausar, rebobinar o poner en cámara lenta. Esta distancia cognitiva activa la corteza prefrontal y da al niño control sobre cómo procesa experiencias difíciles del pasado."
+      }
+    ]
+  },
+  {
+    chapter:4,chapterName:"Integración del Yo (Mindsight)",chapterColor:"#5a7a5a",chapterBg:"#e4eee4",
+    items:[
+      {
+        num:"07", en:"Let the Clouds of Emotion Roll By", es:"Deja Pasar las Nubes",
+        preview:"Las emociones son temporales — el niño puede observarlas sin ser arrastrado.",
+        full:"Enséñale que <strong>las emociones son como nubes que pasan</strong> — el cielo siempre está detrás. El niño no ES su emoción, la TIENE. Esta consciencia ('I feel angry' vs 'I am angry') desarrolla el mindsight y la regulación emocional a largo plazo."
+      },
+      {
+        num:"08", en:"SIFT", es:"Explorar Sensaciones, Imágenes, Sentimientos y Pensamientos",
+        preview:"Ayuda al niño a observar lo que pasa dentro de sí mismo.",
+        full:"<strong>S</strong>ensations (¿qué sientes en el cuerpo?), <strong>I</strong>mages (¿qué imagen viene a tu mente?), <strong>F</strong>eelings (¿qué emoción es?), <strong>T</strong>houghts (¿qué estás pensando?). Este chequeo interno desarrolla conciencia de sí mismo — la base de la inteligencia emocional."
+      },
+      {
+        num:"09", en:"Exercise Mindsight", es:"Ejercitar el Mindsight",
+        preview:"Ver la propia mente y la de los demás con claridad y empatía.",
+        full:"<strong>Mindsight</strong> es la capacidad de ver y entender la propia mente y la de otros. Se desarrolla contando historias, hablando de emociones ajenas ('¿qué crees que sentía ese personaje?'), y siendo consciente del propio estado interno. Es la base de la empatía."
+      },
+      {
+        num:"10", en:"Moving Between Wheel and Mud", es:"Navegar Entre la Rueda y el Barro",
+        preview:"La mente tiene un centro tranquilo — enséñale a volver a él.",
+        full:"Siegel usa la imagen de una <strong>Rueda de Conciencia</strong>: el eje es el yo tranquilo y observador; el borde son los pensamientos/emociones/sensaciones. El niño que aprende a volver al eje no queda atrapado en el barro de las emociones intensas."
+      }
+    ]
+  },
+  {
+    chapter:5,chapterName:"Integración Relacional",chapterColor:"#7a5aa8",chapterBg:"#ede0fa",
+    items:[
+      {
+        num:"11", en:"Increase the Family Fun Factor", es:"Aumentar la Diversión Familiar",
+        preview:"El juego compartido construye la integración relacional y el apego seguro.",
+        full:"El juego, la risa y las actividades placenteras juntos no son 'extras' — son <strong>nutrición neurológica</strong>. Activan el sistema límbico de forma positiva, fortalecen el apego y enseñan al cerebro que las relaciones son seguras y alegres. El cerebro aprende mejor en estado de calma y alegría."
+      },
+      {
+        num:"12", en:"Connect Through Conflict", es:"Conectar a Través del Conflicto",
+        preview:"Los conflictos son oportunidades de enseñanza, no solo problemas a resolver.",
+        full:"Los conflictos con hermanos, amigos o contigo mismo son <strong>laboratorios de habilidades sociales</strong>. En lugar de solo resolverlo, úsalo para enseñar empatía, perspectiva, reparación y comunicación. Un conflicto bien manejado enseña más que cien lecciones en calma."
+      }
+    ]
+  }
+];
+
+const concepts = [
+  {
+    icon:"🏠",iconBg:"#dce9f8",
+    title:"Piso de Arriba y de Abajo",
+    subtitle:"La división vertical del cerebro",
+    body:"Siegel divide el cerebro verticalmente. El <strong>Piso de Arriba</strong> es la corteza, especialmente la prefrontal: pensamiento complejo, empatía, moralidad, toma de decisiones. El <strong>Piso de Abajo</strong> incluye el sistema límbico y el tronco encefálico: emociones fuertes, instintos, supervivencia. En los niños, la escalera entre pisos está en construcción permanente."
+  },
+  {
+    icon:"↔️",iconBg:"#ede0fa",
+    title:"Hemisferio Izquierdo y Derecho",
+    subtitle:"La división horizontal del cerebro",
+    body:"El <strong>hemisferio izquierdo</strong> es lógico, lingüístico y lineal: procesa hechos, causa-efecto, palabras. El <strong>hemisferio derecho</strong> es emocional, holístico y no verbal: procesa emociones, imágenes, el tono de voz. Los niños pequeños viven desde el derecho. La integración entre ambos permite que sientan Y piensen al mismo tiempo."
+  },
+  {
+    icon:"🔥",iconBg:"#f5e6e0",
+    title:"Amygdala Hijack",
+    subtitle:"Cuando la alarma toma el control",
+    body:"El <strong>amygdala hijack</strong> ocurre cuando la amígdala detecta (real o falsamente) una amenaza y desconecta la corteza prefrontal. El niño literalmente no puede razonar en ese momento. Intentar disciplinar durante un hijack no funciona — el cerebro pensante no está disponible. Primero hay que <em>regular</em>, luego <em>enseñar</em>."
+  },
+  {
+    icon:"🔗",iconBg:"#e4eee4",
+    title:"Integración Cerebral",
+    subtitle:"El objetivo central del libro",
+    body:"La integración es la capacidad de <strong>conectar partes diferenciadas</strong> del cerebro para que trabajen juntas hacia un propósito común. No es suprimir emociones ni ignorar la lógica — es que coexistan. Un cerebro integrado produce regulación emocional, empatía, moralidad, intuición y bienestar. Los padres son los 'arquitectos' de esta integración."
+  },
+  {
+    icon:"🧘",iconBg:"#fef3e2",
+    title:"Mindsight",
+    subtitle:"Ver la propia mente con claridad",
+    body:"Concepto central de Siegel: la capacidad de <strong>percibir y comprender la propia mente y la de los demás</strong>. Implica conciencia interna (qué siento, qué pienso, qué necesito) y externa (qué siente y piensa el otro). Se desarrolla en la infancia con ayuda de los padres. Es la base de la empatía y la inteligencia emocional."
+  },
+  {
+    icon:"🔄",iconBg:"#f5e6e0",
+    title:"Neuroplasticidad",
+    subtitle:"El cerebro cambia según las experiencias",
+    body:"Los cerebros de los niños son <strong>extraordinariamente plásticos</strong>: cada experiencia deja una huella neuronal. Interacciones repetidas con los padres literalmente dan forma a las conexiones del cerebro. Esto es esperanza: los patrones negativos se pueden cambiar, y las interacciones positivas constantes construyen un cerebro sano. <em>Las neuronas que se activan juntas, se conectan juntas.</em>"
+  }
+];
+
+// ============ RENDER STRATEGIES ============
+function renderStrategies(){
+  const container = document.getElementById('strat-list');
+  container.innerHTML = '';
+  strategies.forEach(ch => {
+    const block = document.createElement('div');
+    block.className = 'chapter-block';
+    block.innerHTML = `
+      <div class="chapter-label">
+        <div class="chapter-num" style="background:${ch.chapterBg};color:${ch.chapterColor};">${ch.chapter}</div>
+        <span class="chapter-name">${ch.chapterName}</span>
+      </div>
+    `;
+    ch.items.forEach((s,i) => {
+      const card = document.createElement('div');
+      card.className = 'strat-card anim-in';
+      card.id = `strat-${s.num}`;
+      card.style.cssText = `--before-color:${ch.chapterColor};`;
+      card.innerHTML = `
+        <div class="strat-num" style="color:${ch.chapterColor};">Estrategia ${s.num}</div>
+        <div class="strat-name-en">${s.en}</div>
+        <div class="strat-name-es" style="color:${ch.chapterColor};">${s.es}</div>
+        <div class="strat-preview">${s.preview}</div>
+      `;
+      card.style.setProperty('--c',ch.chapterColor);
+      card.querySelector('.strat-card::before') // we use inline style instead
+      card.style.borderLeft = `4px solid ${ch.chapterColor}`;
+      card.onclick = () => openStratModal(s, ch.chapterColor, ch.chapterBg);
+      block.appendChild(card);
+    });
+    container.appendChild(block);
+  });
+}
+
+// ============ RENDER CONCEPTS ============
+function renderConcepts(){
+  const container = document.getElementById('conc-accordion');
+  concepts.forEach((c,i) => {
+    const div = document.createElement('div');
+    div.className = 'conc-card';
+    div.innerHTML = `
+      <div class="conc-card-header" onclick="toggleConc(this)">
+        <div class="conc-icon" style="background:${c.iconBg};">${c.icon}</div>
+        <div>
+          <div class="conc-title">${c.title}</div>
+          <div class="conc-subtitle">${c.subtitle}</div>
+        </div>
+        <span class="conc-arrow">▾</span>
+      </div>
+      <div class="conc-body">${c.body}</div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function toggleConc(header){
+  const card = header.parentElement;
+  const body = card.querySelector('.conc-body');
+  const isOpen = body.classList.contains('open');
+  // close all
+  document.querySelectorAll('.conc-body.open').forEach(b=>{b.classList.remove('open');b.parentElement.classList.remove('open');});
+  if(!isOpen){body.classList.add('open');card.classList.add('open');}
+}
+
+// ============ MODAL ============
+function openModal(id){
+  const r = regions[id];
+  if(!r) return;
+  document.getElementById('m-tag').textContent = r.tag;
+  document.getElementById('m-tag').style.cssText = `background:${r.bg};color:${r.color};`;
+  document.getElementById('m-title').textContent = r.title;
+  document.getElementById('m-title').style.color = r.color;
+  document.getElementById('m-body').innerHTML = r.body;
+  document.getElementById('m-tip').innerHTML = r.tip;
+  const chips = document.getElementById('m-chips');
+  chips.innerHTML = '';
+  r.chips.forEach(c => {
+    const chip = document.createElement('span');
+    chip.className = 'chip';
+    chip.textContent = c;
+    chip.style.cssText = `background:${r.bg};color:${r.color};border:1px solid ${r.color}44;`;
+    chips.appendChild(chip);
+  });
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function openStratModal(s, color, bg){
+  document.getElementById('m-tag').textContent = `Estrategia ${s.num}`;
+  document.getElementById('m-tag').style.cssText = `background:${bg};color:${color};`;
+  document.getElementById('m-title').textContent = s.en;
+  document.getElementById('m-title').style.color = color;
+  document.getElementById('m-body').innerHTML = s.full;
+  document.getElementById('m-tip').innerHTML = `<strong>En español:</strong> "${s.es}" — ${s.preview}`;
+  document.getElementById('m-chips').innerHTML = '';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal(e){
+  if(e.target === document.getElementById('modal-overlay')) closeModalBtn();
+}
+function closeModalBtn(){
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+// ============ NAVIGATION ============
+let currentScreen = 's-home';
+const navMap = {'s-home':'nav-home','s-brain':'nav-brain','s-strategies':'nav-strat','s-concepts':'nav-conc'};
+
+function goTo(id){
+  if(id === currentScreen) return;
+  document.getElementById(currentScreen).classList.remove('active');
+  document.getElementById(navMap[currentScreen]).classList.remove('active');
+  document.getElementById(id).classList.add('active');
+  document.getElementById(navMap[id]).classList.add('active');
+  currentScreen = id;
+}
+
+function highlightStrat(idx){
+  const cards = document.querySelectorAll('.strat-card');
+  if(cards[idx]){
+    cards[idx].scrollIntoView({behavior:'smooth',block:'center'});
+    cards[idx].style.boxShadow = '0 0 0 3px #3d6fa8, 0 6px 28px rgba(30,24,18,0.12)';
+    setTimeout(()=>{cards[idx].style.boxShadow='';},2000);
+  }
+}
+
+// ============ INIT ============
+renderStrategies();
+renderConcepts();
+
+// ============ PWA SETUP ============
+// Brain icon SVG as base64 data URI
+const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#1e1812"/>
+  <ellipse cx="256" cy="210" rx="148" ry="138" fill="#3a6898" opacity="0.9"/>
+  <path d="M256 82 C230,76 206,80 185,92 C152,108 128,136 114,168 C100,200 97,236 102,265 C107,290 120,308 138,310 C178,310 218,310 256,310 Z" fill="#4a7fb5" opacity="0.95"/>
+  <path d="M256 82 C282,76 306,80 327,92 C360,108 384,136 398,168 C412,200 415,236 410,265 C405,290 392,308 374,310 C334,310 294,310 256,310 Z" fill="#7a5aaa" opacity="0.88"/>
+  <path d="M185,92 C200,74 226,68 256,68 C286,68 312,74 327,92 C310,104 284,110 256,110 C228,110 202,104 185,92 Z" fill="#90c8f8"/>
+  <path d="M138,310 C122,310 108,323 104,340 C100,360 108,382 126,392 C154,402 200,406 256,406 C312,406 358,402 386,392 C404,382 412,360 408,340 C404,323 390,310 374,310 Z" fill="#c8603a" opacity="0.92"/>
+  <ellipse cx="185" cy="365" rx="30" ry="20" fill="#a02010" opacity="0.9"/>
+  <ellipse cx="327" cy="365" rx="30" ry="20" fill="#a02010" opacity="0.9"/>
+  <path d="M228,406 C222,416 218,432 220,448 C222,464 232,476 248,479 C252,480 260,480 264,479 C280,476 290,464 292,448 C294,432 290,416 284,406 Z" fill="#7a3068"/>
+  <text x="256" y="490" font-family="Arial" font-size="28" fill="rgba(255,255,255,0.4)" text-anchor="middle">🧠</text>
+</svg>`;
+
+const iconDataUrl = 'data:image/svg+xml;base64,' + btoa(iconSvg);
+
+// Set apple touch icon
+document.getElementById('apple-icon').href = iconDataUrl;
+
+// Create manifest blob
+const manifest = {
+  name: "Whole Brain Child",
+  short_name: "Whole Brain",
+  description: "Guía visual del libro The Whole Brain Child",
+  start_url: "./",
+  display: "standalone",
+  orientation: "portrait",
+  background_color: "#1e1812",
+  theme_color: "#1e1812",
+  lang: "es",
+  icons: [
+    { src: iconDataUrl, sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
+    { src: iconDataUrl, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
+  ]
+};
+
+const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+const manifestUrl = URL.createObjectURL(manifestBlob);
+document.getElementById('pwa-manifest').href = manifestUrl;
+
+// Register Service Worker via blob (enables offline + install prompt)
+const swCode = `
+const CACHE = 'wbc-v1';
+self.addEventListener('install', e => {
+  self.skipWaiting();
+});
+self.addEventListener('activate', e => {
+  self.clients.claim();
+});
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    caches.match(e.request).then(r => r || fetch(e.request).catch(() => new Response('Offline')))
+  );
+});
+`;
+const swBlob = new Blob([swCode], { type: 'application/javascript' });
+const swUrl = URL.createObjectURL(swBlob);
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register(swUrl).catch(() => {});
+}
+
+// Install button logic
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  showInstallBanner();
+});
+
+function showInstallBanner() {
+  const banner = document.createElement('div');
+  banner.id = 'install-banner';
+  banner.style.cssText = `
+    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+    background: #1e1812; color: white; border-radius: 16px;
+    padding: 14px 20px; display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4); z-index: 9999;
+    font-family: Nunito, sans-serif; font-size: 0.88rem; font-weight: 700;
+    white-space: nowrap; cursor: pointer; border: 1px solid rgba(255,255,255,0.15);
+    animation: slideUp 0.4s cubic-bezier(0.34,1.2,0.64,1);
+  `;
+  banner.innerHTML = `
+    <span style="font-size:1.4rem;">🧠</span>
+    <div>
+      <div style="font-size:0.9rem;">Instalar como app</div>
+      <div style="font-size:0.72rem;opacity:0.6;font-weight:400;">Agregar a pantalla de inicio</div>
+    </div>
+    <button onclick="installApp()" style="background:#c8603a;color:white;border:none;border-radius:10px;padding:8px 14px;font-family:Nunito;font-size:0.8rem;font-weight:800;cursor:pointer;">Instalar</button>
+    <button onclick="document.getElementById('install-banner').remove()" style="background:rgba(255,255,255,0.1);color:white;border:none;border-radius:8px;padding:8px 10px;cursor:pointer;font-size:0.75rem;">✕</button>
+  `;
+  const style = document.createElement('style');
+  style.textContent = `@keyframes slideUp{from{opacity:0;transform:translateX(-50%) translateY(20px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}`;
+  document.head.appendChild(style);
+  document.body.appendChild(banner);
+}
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+      const b = document.getElementById('install-banner');
+      if (b) b.remove();
+    });
+  }
+}
+</script>
+</body>
+</html>
